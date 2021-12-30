@@ -1,0 +1,5 @@
+D:\workspace-dotnet\BookStore\BookStore.Domain\bin\Debug\BookStore.Domain.dll
+D:\workspace-dotnet\BookStore\BookStore.Domain\bin\Debug\BookStore.Domain.pdb
+D:\workspace-dotnet\BookStore\BookStore.Domain\obj\Debug\BookStore.Domain.dll
+D:\workspace-dotnet\BookStore\BookStore.Domain\obj\Debug\BookStore.Domain.pdb
+D:\workspace-dotnet\BookStore\BookStore.Domain\obj\Debug\BookStore.Domain.csprojResolveAssemblyReference.cache
