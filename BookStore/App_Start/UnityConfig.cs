@@ -21,7 +21,6 @@ namespace BookStore
             container.RegisterType<IAuthorRepository, AuthorRepository>();
             container.RegisterType<BookStoreDataContext, BookStoreDataContext>();
 
-
             DependencyResolver.SetResolver(new UnityDependencyResolver(container));
         }
     }
