@@ -1,4 +1,4 @@
-﻿@model BookStore.ViewModels.CreateBookViewModel
+﻿@model BookStore.ViewModels.EditorBookViewModel
 
 @{
     ViewBag.Title = "Criando um novo livro...";
@@ -10,34 +10,13 @@
 
 <h2>Novo Livro</h2>
 
-<form>
-    <div class="form-group">
-        @Html.LabelFor( model => model.Nome)
-        @Html.EditorFor(model => model.Nome, new { htmlAttributes = new { @class = "form-control", placeholder="Email" } })
-    </div>
+@using (Html.BeginForm())
+{
+    @Html.Partial("Partials/EditorBookPartial", Model)
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.ISBN)
-        @Html.EditorFor(model => model.ISBN, new { htmlAttributes = new { @class = "form-control", placeholder = "ISBN" } })
-    </div>
+    <button type="submit" class="btn btn-default">Criar</button>
+}
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.DataLancamento)
-        @Html.EditorFor(model => model.DataLancamento, new { htmlAttributes = new { @class = "form-control" } })
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor( model => model.CategoriaId )
-        @Html.DropDownListFor( m => m.CategoriaId,
-                                Model.CategoriaOptions,
-                                "Selecione uma opção...",
-                                new {  @class = "form-control" } )
-    </div>
-
-    <div class="form-group">
-        <button type="submit" class="btn btn-default">Submeter</button>
-    </div>
-</form>
 
 <p>
     @MinhaFuncao( "Marco ")

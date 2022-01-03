@@ -1,4 +1,5 @@
 ﻿using BookStore.Context;
+using BookStore.Domain;
 using BookStore.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -19,7 +20,7 @@ namespace BookStore.Controllers
         {
             var categorias = _db.Categorias.ToList();
 
-            var model = new CreateBookViewModel
+            var model = new EditorBookViewModel
             {
                 Nome = "",
                 ISBN = "",
@@ -28,18 +29,69 @@ namespace BookStore.Controllers
             };
 
             return View(model);
-
-
-
-
-            return View();
         }
 
         [Route("criar")]
         [HttpPost]
-        public ActionResult Create( CreateBookViewModel model)
+        public ActionResult Create( EditorBookViewModel model)
         {
-            return View();
+            var livro = new Livro();
+
+            livro.Nome = model.Nome;
+            livro.ISBN = model.ISBN;
+            livro.DataLancamento = model.DataLancamento;
+            livro.CategoriaId = model.CategoriaId;
+
+            _db.Livros.Add(livro);
+            _db.SaveChanges();
+
+            //            return View();
+
+            return RedirectToAction("Index");
+        }
+
+        [Route("listar")]
+        public ActionResult Index()
+        {
+            return View(_db.Livros.ToList());
+        }
+
+
+
+        [Route("editar")]
+        public ActionResult Edit(int id)
+        {
+            var categorias = _db.Categorias.ToList();
+
+            var livro = _db.Livros.Find(id);
+
+            var model = new EditorBookViewModel
+            {
+                Nome = livro.Nome,
+                ISBN = livro.ISBN,
+                DataLancamento = livro.DataLancamento,
+                CategoriaId = livro.CategoriaId,
+                CategoriaOptions = new SelectList(categorias, "Id", "Nome")
+            };
+
+            return View(model);
+        }
+
+        [Route("editar")]
+        [HttpPost]
+        public ActionResult Edit(EditorBookViewModel model)
+        {
+            Livro livro = _db.Livros.Find(model.Id);
+
+            livro.Nome = model.Nome;
+            livro.ISBN = model.ISBN;
+            livro.DataLancamento = model.DataLancamento;
+            livro.CategoriaId = model.CategoriaId;
+
+            _db.Entry<Livro>(livro).State = System.Data.Entity.EntityState.Modified;
+            _db.SaveChanges();
+
+            return RedirectToAction("Index");
         }
 
 
