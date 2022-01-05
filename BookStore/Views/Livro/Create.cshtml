@@ -2,10 +2,7 @@
 
 @{
     ViewBag.Title = "Criando um novo livro...";
-}
-
-@helper MinhaFuncao( string nome) { 
-    <text>O nome informado é @nome</text>
+    Layout = "~/Views/Shared/_LayoutNovo.cshtml";                // Linha incluida 
 }
 
 <h2>Novo Livro</h2>
@@ -18,10 +15,14 @@
 }
 
 
-<p>
-    @MinhaFuncao( "Marco ")
-</p>
-
+@section menu{
+    <div>
+        Olá, você esta na página de Inserção
+        <p>
+            <a href="@Url.Action("Index")">Voltar</a>
+        </p>
+    </div>
+}
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

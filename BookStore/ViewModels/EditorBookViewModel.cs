@@ -27,8 +27,10 @@ namespace BookStore.ViewModels
         public DateTime DataLancamento { get; set; }
 
         [Required(ErrorMessage = "*")]
+        [Display(Name = "Categoria")]
         public int CategoriaId { get; set; }
 
+        [Display(Name = "Categoria")]
         public SelectList CategoriaOptions { get; set; }
 
     }
