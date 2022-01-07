@@ -35,6 +35,15 @@ namespace BookStore.Controllers
         [HttpPost]
         public ActionResult Create( EditorBookViewModel model)
         {
+            if (!ModelState.IsValid)
+            {
+
+                var categorias = _db.Categorias.ToList();
+                model.CategoriaOptions = new SelectList(categorias, "Id", "Nome");
+
+                return View(model);
+            };
+
             var livro = new Livro();
 
             livro.Nome = model.Nome;
@@ -43,7 +52,20 @@ namespace BookStore.Controllers
             livro.CategoriaId = model.CategoriaId;
 
             _db.Livros.Add(livro);
-            _db.SaveChanges();
+
+            try
+            {
+                _db.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError("Mensagem", ex.Message);
+
+                var categorias = _db.Categorias.ToList();
+                model.CategoriaOptions = new SelectList(categorias, "Id", "Nome");
+
+                return View(model);
+            }
 
             //            return View();
 
